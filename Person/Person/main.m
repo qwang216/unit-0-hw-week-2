@@ -1,63 +1,125 @@
 //
 //  main.m
-//  Person
+//  PersonHomeWork
 //
-//  Created by Michael Kavouras on 6/21/15.
-//  Copyright (c) 2015 Mike Kavouras. All rights reserved.
+//  Created by Jason Wang on 6/23/15.
+//  Copyright (c) 2015 Jason Wang. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-@interface Person: NSObject
+@interface Person : NSObject
 
-- (void)setName:(NSString *)name;
-- (NSString *)name;
+-(void)setCity: (NSString *)city;
+-(NSString *)city;
 
-- (void)setCity:(NSString *)city;
-- (NSString *)city;
+-(void)setPhoneNumber: (NSString *)phoneNumber;
+-(NSString *)phontNumber;
 
-- (void)setPhoneNumber:(NSString *)phoneNumber;
-- (NSString *)phoneNumber;
+-(void)setName: (NSString *)name;
+-(NSString *)name;
+
+- (void) changePersonsName:(Person *)aPerson
+                    toName:(NSString *)newName;
+
+-(BOOL)checkSameCity:(Person *)aPerson;
+
+-(Person *)haveChild;
 
 @end
 
 @implementation Person {
-    NSString *_name;
-    NSString *_phoneNumber;
     NSString *_city;
+    NSString *_phoneNumber;
+    NSString *_name;
 }
 
-- (void)setName:(NSString *)name {
-    _name = name;
-}
-
-- (NSString *)name {
-    return _name;
-}
-
-- (void)setCity:(NSString *)city {
+-(void)setCity: (NSString *)city {
     _city = city;
 }
-
-- (NSString *)city {
+-(NSString *)city {
     return _city;
 }
 
-- (void)setPhoneNumber:(NSString *)phoneNumber {
+-(void)setPhoneNumber: (NSString *)phoneNumber {
     _phoneNumber = phoneNumber;
 }
-
-- (NSString *)phoneNumber {
+-(NSString *)phontNumber {
     return _phoneNumber;
+}
+
+-(void)setName: (NSString *)name {
+    _name = name;
+}
+-(NSString *)name{
+    return _name;
+}
+
+-(void)changePersonsName:(Person *)aPerson
+                  toName:(NSString *)newName {
+    [aPerson setName:newName];
+}
+
+-(BOOL)checkSameCity:(Person *)aPerson {
+    if ([[aPerson city] isEqualToString:[self city]]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+-(Person *)haveChild {
+    Person *child = [[Person alloc]init];
+    [child setCity:[self city]];
+    [child setPhoneNumber:[self phontNumber]];
+    return child;
 }
 
 @end
 
 
+
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        // insert code here...
-        NSLog(@"Hello, World!");
+        // START CODE HERE
+        
+        
+        Person *carl = [[Person alloc] init];
+        Person *mike = [[Person alloc] init];
+        
+        [carl setName:@"Carl"];
+        
+        [carl setCity:@"Okinawa"];
+        [mike setCity:@"New York"];
+        
+        BOOL citiesAreSame = [mike checkSameCity:carl];
+        NSLog(@"%d", citiesAreSame);
+        
+        [carl setPhoneNumber:@"867-5309"];
+        
+        NSString *carlsName = [carl name];
+        NSLog(@"%@",carlsName);
+        
+        [carl setName:@"Stenven"];
+        NSLog(@"%@",[carl name]);
+        NSLog(@"%@",[carl city]);
+        
+        [carl setCity:@"New York"];
+        NSLog(@"%@", [carl city]);
+        
+        
+        [mike changePersonsName:carl toName:@"Carl"];
+        NSLog(@"%@", [carl name]);
+        
+        citiesAreSame = [mike checkSameCity:carl];
+        NSLog(@"%d", citiesAreSame);
+        
+        Person *mikesBaby = [mike haveChild];
+        NSLog(@"%@", [mikesBaby city]);
+        [mike changePersonsName:mikesBaby toName:@"ABC"];
+        NSLog(@"%@", [mikesBaby name]);
+        
+        // END CODE HERE
     }
     return 0;
 }
