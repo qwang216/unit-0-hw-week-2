@@ -52,14 +52,14 @@
 }
 
 - (BOOL) codeBreaker: (NSString *)string secondCipher:(NSString *)string2 {
-    for (int offset1 = 0; offset1 < 26; offset1++) {
+    
         for (int offset2 = 0; offset2 < 26; offset2++) {
-            if ([[self encode:string offset:offset1] isEqualToString:[self encode:string2 offset:offset2]]) {
+            if ([string isEqualToString:[self encode:string2 offset:offset2]]) {
                 return YES;
                 break;
             }
         }
-    }
+    
     return 0;
 }
 
@@ -69,8 +69,8 @@
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         CaesarCipher *check = [[CaesarCipher alloc] init];
-        NSString *oneString = [check encode: @"jason" offset: 4];
-        NSString *secondString = [check encode: @"jason" offset: 11];
+        NSString *oneString = [check encode: @"I like turtles" offset: 4];
+        NSString *secondString = [check decode: @"I like turtles" offset: 11];
         NSLog(@"%@", oneString);
         NSLog(@"%@", secondString);
         BOOL areTheyTheSame = [check codeBreaker:oneString secondCipher:secondString];

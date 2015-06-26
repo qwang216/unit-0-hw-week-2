@@ -25,6 +25,7 @@
 -(BOOL)checkSameCity:(Person *)aPerson;
 
 -(Person *)haveChild;
+-(void)claimChild: (Person *)childToClaim;
 
 @end
 
@@ -32,6 +33,8 @@
     NSString *_city;
     NSString *_phoneNumber;
     NSString *_name;
+//    Person *_child;
+    NSMutableArray *_children;
 }
 
 -(void)setCity: (NSString *)city {
@@ -73,6 +76,10 @@
     [child setCity:[self city]];
     [child setPhoneNumber:[self phontNumber]];
     return child;
+}
+
+-(void)claimChild: (Person *)childToClaim {
+    [_children
 }
 
 @end
