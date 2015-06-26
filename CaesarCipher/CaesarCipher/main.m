@@ -56,7 +56,6 @@
         for (int offset2 = 0; offset2 < 26; offset2++) {
             if ([string isEqualToString:[self encode:string2 offset:offset2]]) {
                 return YES;
-                break;
             }
         }
     
